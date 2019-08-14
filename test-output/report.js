@@ -7,7 +7,7 @@ formatter.feature({
   "keyword": "Feature"
 });
 formatter.before({
-  "duration": 7951553176,
+  "duration": 6266435081,
   "status": "passed"
 });
 formatter.scenario({
@@ -42,23 +42,32 @@ formatter.match({
   "location": "IRCTCApp.open_chrome_browser_and_start_IRCTC_application()"
 });
 formatter.result({
-  "duration": 3181301465,
+  "duration": 4586887664,
   "status": "passed"
 });
 formatter.match({
   "location": "IRCTCApp.login_as_user_on_IRCTC_application()"
 });
 formatter.result({
-  "duration": 46055546718,
+  "duration": 55165,
   "status": "passed"
 });
 formatter.match({
   "location": "IRCTCApp.user_should_able_to_visit_the_home_page()"
 });
 formatter.result({
-  "duration": 15043259094,
+  "duration": 29828,
   "status": "passed"
 });
 formatter.match({
   "location": "IRCTCApp.enter_Train_details()"
+});
+formatter.result({
+  "duration": 252632710635,
+  "status": "passed"
+});
+formatter.after({
+  "duration": 580833,
+  "status": "passed"
+});
 });

@@ -53,7 +53,7 @@ public class Irctc_Page extends BaseUtil{
 	public void enterTrainDetails(String fromplace,String toplace) throws IOException
 	{
 
-		
+
 		lib.sendValueAndEnter("from", CommonFuntion.getProperty(fromplace));
 		lib.sendValueAndEnter("to", CommonFuntion.getProperty(toplace));
 		//lib.clearAndEnterValue("date", CommonFuntion.getProperty(datetotrip));
@@ -73,5 +73,64 @@ public class Irctc_Page extends BaseUtil{
 	public void classselection(String irctcclass) throws IOException
 	{
 		lib.trainclassselection("classlist", CommonFuntion.getProperty(irctcclass));
+	}public void clickflexiblecheckbox() throws InterruptedException
+	{
+		lib.clickRadioButtonOrCheckBox("flexiblecheckbox");
+		lib.clickRadioButtonOrCheckBox("Journalistcheckbox");
+		lib.clickAnElement("Okbutton");
+
+		//lib.alerthandle("Okbutton");
+
 	}
+	public void clickfindtrainButton()
+	{
+		lib.clickAnElement("findTrain");
+	}
+	public void logoutbutton()
+	{
+		lib.clickAnElement("logout");
+	}
+	//	public void pnrbutton(String secondwindow , String firstwindow) throws InterruptedException, IOException
+	//	{
+	//		lib.clickAnElement("pnrstatus");
+	//		Thread.sleep(3000);
+	//		CommonFuntion.switchToWindow(CommonFuntion.getProperty(secondwindow));
+	//		System.out.println("The Second Window title is "+driver.getTitle());
+	//		lib.waitInSleep();
+	//		CommonFuntion.switchToWindow(CommonFuntion.getProperty(firstwindow));
+	//		System.out.println("The first Window title is "+driver.getTitle());
+	//		
+	//	}
+	public void pnrbutton(String secondwindow) throws InterruptedException, IOException
+	{
+		lib.clickAnElement("pnrstatus");
+		Thread.sleep(3000);
+		CommonFuntion.switchToWindow(CommonFuntion.getProperty(secondwindow));
+		System.out.println("The Second Window title is "+driver.getTitle());
+		lib.waitInSleep();
+	}
+
+	public void pnrnostatus(String pnrnumberless,String pnrerror ,String pnrnumber, String pnrinvalid) throws IOException, InterruptedException
+	{
+		lib.waitForElementUsingPresence("pnrinput");
+		lib.enterText("pnrinput", CommonFuntion.getProperty(pnrnumberless));
+		lib.clickAnElement("pnrsubmit");
+		lib.verifyErrorMessage("pnrerror", CommonFuntion.getProperty(pnrerror));
+		lib.clearAndEnterValue("pnrinput", CommonFuntion.getProperty(pnrnumber));
+		lib.clickAnElement("pnrsubmit");
+		lib.waitInSleep();
+		lib.clickAnElement("pnrnosubmit");
+		lib.verifyErrorMessage("pnrerror", CommonFuntion.getProperty(pnrinvalid));
+	}
+	
+	public void seatAvail(String seatclassValue, String seatQuotaText) throws InterruptedException, IOException
+	{
+		lib.clickAnElement("seatavailabilitylink");
+		lib.clickAnElement("seatcalendarimg");
+		lib.clickAnElement("seatcalendarnextbutton");
+		lib.clickAnElement("seatdate");
+		lib.selectDropdown("seatavailabilityclass", "Value", CommonFuntion.getProperty(seatclassValue));
+		lib.selectDropdown("seatQuota", "VisibleText", CommonFuntion.getProperty(seatQuotaText));
+	}
+ 
 }

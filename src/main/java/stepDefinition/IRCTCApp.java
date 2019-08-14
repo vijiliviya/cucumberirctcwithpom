@@ -20,28 +20,37 @@ public class IRCTCApp extends BaseUtil {
 	@Given("^Open chrome browser and start IRCTC application$")
 	public void open_chrome_browser_and_start_IRCTC_application() throws InterruptedException, IOException{
 		irctcpageobj.launchUrl("irctcurl");
-		//lib.alerthandle();
+		
 		
 	}
 
 	@When("^Login as user on IRCTC application$")
 	public void login_as_user_on_IRCTC_application() throws IOException, InterruptedException {
-		irctcpageobj.clickLoginlink();
-		irctcpageobj.sendCredentials("username","password");
+		//irctcpageobj.clickLoginlink();
+		//irctcpageobj.sendCredentials("username","password");
 	
-		irctcpageobj.clickLoginButton();
+		//irctcpageobj.clickLoginButton();
 	    
 	}
 	@Then("^User should able to visit the home page$")
 	public void user_should_able_to_visit_the_home_page() throws IOException {
-		irctcpageobj.verifypageTitle("irctcPageTitle");
+		//irctcpageobj.verifypageTitle("irctcPageTitle");
 	}
 	@Then("^Enter Train details$")
 	public void enter_Train_details() throws Throwable {
-	    irctcpageobj.enterTrainDetails("fromplace", "toplace");
-	    irctcpageobj.calendar("datetotrip");
-	    irctcpageobj.clickdropdownButton();
-	    irctcpageobj.classselection("irctcclass");
+	    //irctcpageobj.enterTrainDetails("fromplace", "toplace");
+	    //irctcpageobj.calendar("datetotrip");
+	    //irctcpageobj.clickdropdownButton();
+	    //irctcpageobj.classselection("irctcclass");
+	    //irctcpageobj.clickflexiblecheckbox();
+	    //irctcpageobj.clickfindtrainButton();
+	    //irctcpageobj.logoutbutton();
+	    //irctcpageobj.pnrbutton("secondwindow","firstwindow");
+	    irctcpageobj.pnrbutton("secondwindow");
+	    irctcpageobj.pnrnostatus("pnrnumberless","pnrerror","pnrnumber","pnrinvalid");
+	    irctcpageobj.seatAvail("seatclassValue", "seatQuotaText");
+	    
 	}
+	
 
 }

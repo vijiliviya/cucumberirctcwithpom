@@ -6,8 +6,10 @@ import java.io.FileInputStream;
 import org.junit.Assert;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -29,6 +31,7 @@ public class CommonFuntion extends BaseUtil{
 	String actelement;
 	WebElement element;
 	static String ActualTitle;
+	static String actualError;
 
 	public static String getProperty(String key) throws IOException {
 		String value = "";
@@ -211,6 +214,7 @@ public class CommonFuntion extends BaseUtil{
 			WebElement element = getWebElementWithWait(locatorKey);
 			Thread.sleep(2000);
 			element.clear();
+			Thread.sleep(2000);
 			element.sendKeys(data);
 			waitInSleep();
 		} catch (Exception e) {
@@ -236,10 +240,30 @@ public class CommonFuntion extends BaseUtil{
 		}
 
 	}
+	/*Method to verify the Error Message*/
+	public void verifyErrorMessage(String locatorKey,String ExpectedError)
+	{
+		try
+		{
+		WebElement element = null;
+		element = getWebElementWithWait(locatorKey);
+		wait.until(ExpectedConditions.textToBePresentInElement(element, ExpectedError));
+		String actualError=element.getText().trim();
+		System.out.println(ExpectedError);
+		System.out.println(actualError);
+		Assert.assertEquals(ExpectedError, actualError);
+		System.out.println("Expected Error "+ExpectedError+"is match with Actual Error "+actualError);
+		}
+		catch(Exception e)
+		{
+			System.out.println("Expected Error "+ExpectedError+" is not match with Actual Error "+actualError);
+			Assert.assertNotEquals(ExpectedError,actualError);
+		}
+	}
 	/*
 	 * Click an Element
 	 */
-	public boolean clickAnElement(String locatorKey) {
+	public boolean clickAnElement (String locatorKey) {
 		WebElement element = null;
 		boolean status = false;
 		try {
@@ -331,7 +355,8 @@ public class CommonFuntion extends BaseUtil{
 			String[] locatorMethodName = readProperties(locatorKey);
 			locatorMethod = locatorMethodName[0];
 			locatorValue = locatorMethodName[1];
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			System.out.println("Error on waitForElementUsingPresence: "+e.getCause());
 			System.exit(1);
 		}
@@ -494,21 +519,38 @@ public class CommonFuntion extends BaseUtil{
 		}
 	}
 
-	public void alerthandle() throws InterruptedException
+	public void alerthandle(String locatorKey) throws InterruptedException
 	{
 		waitInSleep();
+		//WebDriverWait wait = new WebDriverWait(driver, 10);
+    //wait.until(ExpectedConditions.alertIsPresent());
+		//Alert alert = driver.switchTo().alert();
+    //new WebDriverWait(driver, 20).until(ExpectedConditions.elementToBeClickable(By.xpath(locatorKey))).click();
 		// Switching to Alert        
-		Alert alert = driver.switchTo().alert();		
+		//Alert alert = driver.switchTo().alert();		
 
 		// Capturing alert message.    
-		String alertMessage= driver.switchTo().alert().getText();		
+		//String alertMessage= driver.switchTo().alert().getText();		
 
 		// Displaying alert message		
-		System.out.println(alertMessage);	
+    
+		//System.out.println(alertMessage);	
 		Thread.sleep(5000);
 
 		// Accepting alert		
-		alert.accept();	
+		//alert.accept();	
+		
+		try {
+		    WebDriverWait wait = new WebDriverWait(driver, 10);
+		    wait.until(ExpectedConditions.alertIsPresent());
+		   Alert alert = driver.switchTo().alert();
+		    System.out.println(alert.getText());
+		    alert.accept();
+		    //Assert.assertTrue(alert.getText().contains("Thanks."));
+		} catch (Exception e) {
+		    //exception handling
+			System.out.println(e.getMessage());
+		}
 	}
 
 	// clicking the calendar 
@@ -518,7 +560,7 @@ public class CommonFuntion extends BaseUtil{
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
 		js.executeScript("arguments[0].value = '"+ data +"';",element);
-		//js.executeScript("arguments[0].setAttribute('value', '"+dateValue+"');",element);
+		//js.executeScript("arguments[0].setAttribute('value', '"+data+"');",element);
 
 	}
 	public void calendarmethod(String locatorKey,String data) throws InterruptedException
@@ -575,5 +617,24 @@ public class CommonFuntion extends BaseUtil{
 		}
 	}
 
+	//multiple window handles
 	
+	public static void switchToWindow(String data)
+	{
+		String windowId=null;
+		int index = Integer.parseInt(data);
+		Set<String> windowIds=driver.getWindowHandles();
+		System.out.println(windowIds);
+		Iterator<String> its=windowIds.iterator();
+		
+		for(int i=1;i<=index;i++)
+		{
+			windowId= its.next();
+			System.out.println(windowId);
+		}
+		driver.switchTo().window(windowId);
+		System.out.println(windowId);
+		
+	}
+
 }
