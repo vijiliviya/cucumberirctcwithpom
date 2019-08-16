@@ -26,29 +26,29 @@ public class IRCTCApp extends BaseUtil {
 
 	@When("^Login as user on IRCTC application$")
 	public void login_as_user_on_IRCTC_application() throws IOException, InterruptedException {
-		//irctcpageobj.clickLoginlink();
-		//irctcpageobj.sendCredentials("username","password");
+		irctcpageobj.clickLoginlink();
+		irctcpageobj.sendCredentials("username","password");
 	
-		//irctcpageobj.clickLoginButton();
+		irctcpageobj.clickLoginButton();
 	    
 	}
 	@Then("^User should able to visit the home page$")
 	public void user_should_able_to_visit_the_home_page() throws IOException {
-		//irctcpageobj.verifypageTitle("irctcPageTitle");
+		irctcpageobj.verifypageTitle("irctcPageTitle");
 	}
 	@Then("^Enter Train details$")
 	public void enter_Train_details() throws Throwable {
-	    //irctcpageobj.enterTrainDetails("fromplace", "toplace");
-	    //irctcpageobj.calendar("datetotrip");
-	    //irctcpageobj.clickdropdownButton();
-	    //irctcpageobj.classselection("irctcclass");
-	    //irctcpageobj.clickflexiblecheckbox();
-	    //irctcpageobj.clickfindtrainButton();
+	    irctcpageobj.enterTrainDetails("fromplace", "toplace");
+	    irctcpageobj.calendar("datetotrip");
+	    irctcpageobj.clickdropdownButton();
+	    irctcpageobj.classselection("irctcclass");
+	    irctcpageobj.clickflexiblecheckbox();
+	    irctcpageobj.clickfindtrainButton();
 	    //irctcpageobj.logoutbutton();
 	    //irctcpageobj.pnrbutton("secondwindow","firstwindow");
-	    irctcpageobj.pnrbutton("secondwindow");
-	    irctcpageobj.pnrnostatus("pnrnumberless","pnrerror","pnrnumber","pnrinvalid");
-	    irctcpageobj.seatAvail("seatclassValue", "seatQuotaText");
+//	    irctcpageobj.pnrbutton("secondwindow");
+//	    irctcpageobj.pnrnostatus("pnrnumberless","pnrerror","pnrnumber","pnrinvalid");
+//	    irctcpageobj.seatAvail("seatclassValue", "seatQuotaText","seatsourcename","seatDestinationname","seatsourcestationname","seatdestinationstationname","trainnumber","firstwindow");
 	    
 	}
 	

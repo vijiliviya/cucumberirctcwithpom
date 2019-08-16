@@ -123,7 +123,7 @@ public class Irctc_Page extends BaseUtil{
 		lib.verifyErrorMessage("pnrerror", CommonFuntion.getProperty(pnrinvalid));
 	}
 	
-	public void seatAvail(String seatclassValue, String seatQuotaText) throws InterruptedException, IOException
+	public void seatAvail(String seatclassValue, String seatQuotaText , String seatsourcename ,String seatDestinationname ,String seatsourcestationname , String seatdestinationstationname,String trainnumber,String firstwindow) throws InterruptedException, IOException
 	{
 		lib.clickAnElement("seatavailabilitylink");
 		lib.clickAnElement("seatcalendarimg");
@@ -131,6 +131,15 @@ public class Irctc_Page extends BaseUtil{
 		lib.clickAnElement("seatdate");
 		lib.selectDropdown("seatavailabilityclass", "Value", CommonFuntion.getProperty(seatclassValue));
 		lib.selectDropdown("seatQuota", "VisibleText", CommonFuntion.getProperty(seatQuotaText));
+		lib.enterText("seatSourceStation", CommonFuntion.getProperty(seatsourcename));
+		lib.seatclasssection("seatsourcestationlist",CommonFuntion.getProperty(seatsourcestationname) );
+		lib.enterText("seatDestinationStation", CommonFuntion.getProperty(seatDestinationname));
+		lib.seatclasssection("seatDestinationlist", CommonFuntion.getProperty(seatdestinationstationname));
+		lib.enterText("seatTrainNo", CommonFuntion.getProperty(seatDestinationname));
+		lib.seatclasssection("seatTrainNoList", CommonFuntion.getProperty(trainnumber));
+		lib.clickAnElement("seatGetAvailability");
+		lib.clickAnElement("seatpopup");
+		CommonFuntion.switchToWindow(CommonFuntion.getProperty(firstwindow));
 	}
  
 }

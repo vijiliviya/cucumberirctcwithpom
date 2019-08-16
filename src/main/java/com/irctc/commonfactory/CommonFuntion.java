@@ -636,5 +636,51 @@ public class CommonFuntion extends BaseUtil{
 		System.out.println(windowId);
 		
 	}
+	public void seatclasssection(String locatorKey,String expclassname)
+	{
+		String listname = null;
+		WebElement element = null;
+		WebDriverWait wait = new WebDriverWait(driver, 30);
+		String tdList = null;
+
+		try {
+			String[] locatorMethodName = readProperties(locatorKey);
+			locatorMethod = locatorMethodName[0];
+			locatorValue = locatorMethodName[1];
+		} catch (Exception e) {
+			System.out.println("Error on waitForElementUsingPresence: "+e.getCause());
+		}
+		try
+		{
+			switch(locatorMethod)
+			{
+			case "xpath":
+				element=driver.findElement(By.xpath(locatorValue));
+				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(locatorValue)));
+				List<WebElement> listvalue=element.findElements(By.tagName("li"));
+				int listcount=listvalue.size();
+				System.out.println(listcount);
+				for(int i=0;i<=listcount;i++)
+				{
+					listname = listvalue.get(i).findElement(By.tagName("a")).getText().trim();
+					if(listname.contains(expclassname))
+					{
+						Thread.sleep(2000);
+						listvalue.get(i).click();
+						break;
+					}
+				}
+				
+			}
+		
+		}
+		catch (Exception e) {
+			Assert.assertEquals(listname, expclassname);
+			System.out.println("no");
+			System.out.println("error on  irctc class table: "+e.getMessage());
+		
+		
+	}
+	}
 
 }
